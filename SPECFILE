@@ -2,7 +2,7 @@ title: QATP Base Formula
 description: Salt formula for installing some base components in QATP
 root_path: qatp
 components:
-  - title: qatp
+  - title: BaseQATP
     description: QATP base formula
     sls_path: qatp
 pillar_defaults:
