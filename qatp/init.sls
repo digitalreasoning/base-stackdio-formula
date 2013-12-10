@@ -1,13 +1,13 @@
 /home/{{pillar.qatp.username}}/.s3cfg:
   file:
     - managed
-    - source: salt:///home/qatp/s3cfg
+    - source: salt://qatp/home/s3cfg
     - template: jinja
 
 /home/{{pillar.qatp.username}}/.aws/config:
   file:
     - managed
-    - source: salt:///home/qatp/aws_config
+    - source: salt://qatp/home/aws_config
     - template: jinja
 
 base_packages:
@@ -25,5 +25,6 @@ aws-cli:
   file:
     - directory 
     - mode: 777
-    - recurse
+    - recurse:
       - mode
+
