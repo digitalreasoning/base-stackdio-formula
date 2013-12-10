@@ -25,6 +25,9 @@ aws-cli:
   file:
     - directory 
     - mode: 777
-    - recurse:
-      - mode
 
+fix_tty:
+  cmd:
+    - run
+    - name: "sed -i 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers"
+    - user: root
