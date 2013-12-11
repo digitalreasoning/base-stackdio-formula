@@ -10,4 +10,5 @@ pillar_defaults:
     username: qatp
     aws_access_key: MUST_PROVIDE_VALUE
     aws_secret_key: MUST_PROVIDE_VALUE
+    authorized_keys: OPTIONAL_LIST_OF_KEYS
 

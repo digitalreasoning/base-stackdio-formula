@@ -1,0 +1,16 @@
+set nocompatible            " Use Vim defaults (much better!)
+set bs=indent,eol,start     " allow backspacing over everything in insert mode
+set ruler                   " show the cursor position all the time
+set bg=light
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set shiftwidth=4
+set expandtab
+set softtabstop=4
+set number
+set tw=79
+syntax on
+set autoindent
+set vb
