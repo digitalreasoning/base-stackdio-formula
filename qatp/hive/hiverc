@@ -1,0 +1,12 @@
+CREATE TEMPORARY FUNCTION CollectAll as 'com.digitalreasoning.synmodel.hive.udfs.CollectAll';
+CREATE TEMPORARY FUNCTION GetAnnotationId as 'com.digitalreasoning.synmodel.hive.udfs.GetAnnotationId';
+CREATE TEMPORARY FUNCTION GetCategorizedElementId as 'com.digitalreasoning.synmodel.hive.udfs.GetCategorizedElementId';
+CREATE TEMPORARY FUNCTION GetRemoteIdFromReadableElementId as 'com.digitalreasoning.synmodel.hive.udfs.GetRemoteIdFromReadableElementId';
+CREATE TEMPORARY FUNCTION GetUncategorizedElementId as 'com.digitalreasoning.synmodel.hive.udfs.GetUncategorizedElementId';
+CREATE TEMPORARY FUNCTION SyntacticRoleToString as 'com.digitalreasoning.synmodel.hive.udfs.SyntacticRoleToString';
+ADD FILE hdfs://{{ salt['publish.publish']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hadoop.namenode', 'grains.get', 'fqdn', 'compound').values()[0] }}:8020/categories/categories.cats;
+SET hive.exec.parallel=true;
+SET mapred.reduce.tasks={{pillar.cdh4.mapred.reduce_tasks_max}};
+
+-- Will need to do this at runtime
+-- ADD FILE <SYNTHESYS_DIST_HOME/analytics/ext/synmodel-hive-VERSION>/categoryLibrary.py;

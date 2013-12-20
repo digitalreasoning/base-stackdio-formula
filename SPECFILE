@@ -4,11 +4,15 @@ root_path: qatp
 components:
   - title: BaseQATP
     description: QATP base formula
-    sls_path: qatp
+    sls_path: qatp.base
+  - title: HivePost
+    description: Hive configuration specific to DR/QATP
+    sls_path: qatp.hive
 pillar_defaults:
   qatp:
     username: qatp
     aws_access_key: MUST_PROVIDE_VALUE
     aws_secret_key: MUST_PROVIDE_VALUE
     authorized_keys: OPTIONAL_LIST_OF_KEYS
+    harvest_provider: hbase-cdh4
 

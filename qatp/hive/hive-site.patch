@@ -1,0 +1,11 @@
+43a44,53
+>      <property>
+>          <name>com.digitalreasoning.harvest.provider</name>
+>          <value>{{pillar.qatp.harvest_provider}}</value>
+>      </property>
+>  
+>      <property>
+>          <name>com.digitalreasoning.harvest.hbase.zookeeper.quorum</name>
+>          <value>{{ salt['publish.publish']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hadoop.namenode', 'grains.get', 'fqdn', 'compound').values()[0] }}</value>
+>      </property>
+> 
