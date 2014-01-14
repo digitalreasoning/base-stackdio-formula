@@ -25,6 +25,7 @@ base_packages:
     - pkgs: 
       - s3cmd
       - screen
+      - createrepo
 
 aws-cli:
   pip.installed:
