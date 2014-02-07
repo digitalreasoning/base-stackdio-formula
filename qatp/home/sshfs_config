@@ -1,0 +1,5 @@
+Host {{pillar.ipa.sshfs_hostname}}
+StrictHostKeyChecking no
+UserKnownHostsFile=/dev/null
+loglevel=quiet
+IdentityFile /root/.ssh/sshfs_id_rsa

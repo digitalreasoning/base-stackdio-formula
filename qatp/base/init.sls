@@ -26,6 +26,7 @@ base_packages:
       - s3cmd
       - screen
       - createrepo
+      - ntp
 
 aws-cli:
   pip.installed:

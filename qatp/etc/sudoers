@@ -1,0 +1,3 @@
+# IPA sudo groups
+%admins ALL=(ALL) NOPASSWD: ALL
+%sudo ALL=(ALL) NOPASSWD: ALL

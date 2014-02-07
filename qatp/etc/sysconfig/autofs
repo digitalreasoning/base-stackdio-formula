@@ -1,0 +1,13 @@
+#
+# Other common LDAP naming
+#
+MAP_OBJECT_CLASS="automountMap"
+ENTRY_OBJECT_CLASS="automount"
+MAP_ATTRIBUTE="automountMapName"
+ENTRY_ATTRIBUTE="automountKey"
+VALUE_ATTRIBUTE="automountInformation"
+{% for key in pillar.ipa.ldap_uris %}
+LDAP_URI="{{ uri }}"
+{% endfor %}
+SEARCH_BASE="{{ pillar.ipa.search_base }}"
+

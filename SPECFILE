@@ -8,6 +8,9 @@ components:
   - title: HivePost
     description: Hive configuration specific to DR/QATP
     sls_path: qatp.hive
+  - title: IPA
+    description: Enable IPA authentication
+    sls_path: qatp.ipa
 pillar_defaults:
   qatp:
     username: qatp
@@ -15,4 +18,15 @@ pillar_defaults:
     aws_secret_key: MUST_PROVIDE_VALUE
     authorized_keys: OPTIONAL_LIST_OF_KEYS
     harvest_provider: hbase-cdh4
+  ipa:
+    sshfs_hostname: MUST_PROVIDE_VALUE
+    sshfs_private_key: MUST_PROVIDE_VALUE
+    sshfs_public_key: MUST_PROVIDE_VALUE
+    ldap_uris: MUST_PROVIDE_LIST
+    search_base: MUST_PROVIDE_VALUE
+    clientprinc: MUST_PROVIDE_VALUE
+    client_domain: MUST_PROVIDE_VALUE
+    server: MUST_PROVIDE_VALUE
+    realm: MUST_PROVIDE_VALUE
+    client_password: MUST_PROVIDE_VALUE
 
