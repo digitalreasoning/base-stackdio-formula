@@ -27,7 +27,7 @@ authconfig:
     - group: root
     - mode: 755
 
-chkconfig:
+removefromipa_chkconfig:
   cmd:
     - run
     - name: "chkconfig --add removefromipa && chkconfig removefromipa --level 0 on"
@@ -39,7 +39,7 @@ removefromipa:
   service:
     - running
     - require:
-      - cmd: chkconfig
+      - cmd: removefromipa_chkconfig
 
 /etc/sudoers.d/ipa:
   file:
@@ -109,16 +109,26 @@ removefromipa:
     - user: root
     - minute: 1
 
-/etc/nsswitch.conf:
-  file:
-    - replace
-    - pattern: '^automount.*'
-    - repl: 'automount: files ldap'
-
 install_ipa:
   cmd:
     - script
     - template: jinja
     - user: root
     - source: salt://qatp/ipa/scripts/install_ipa.sh
+
+/etc/nsswitch.conf:
+  file:
+    - replace
+    - pattern: '^automount.*'
+    - repl: 'automount: files ldap'
+    - require:
+      - cmd: install_ipa
+
+restart_autofs:
+  cmd:
+    - run
+    - name: "service autofs restart"
+    - user: root
+    - require:
+      - file: /etc/nsswitch.conf
 

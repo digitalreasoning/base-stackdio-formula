@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # this needs to be run twice
-for f in `seq 0 1`; do
+for attempt in `seq 0 1`; do
     ipa-client-install \
         --domain={{ pillar.ipa.client_domain }} \
         --server={{ pillar.ipa.server}} \
@@ -9,7 +9,7 @@ for f in `seq 0 1`; do
         -p builduser \
         -w "{{ pillar.ipa.client_password }}" \
         -U
-    cp /var/log/ipaclient-install.log /var/log/ipaclient-install.log.${ff}
+    cp /var/log/ipaclient-install.log /var/log/ipaclient-install.log.$(date +%s%N)
 done
 
 service sshd restart
