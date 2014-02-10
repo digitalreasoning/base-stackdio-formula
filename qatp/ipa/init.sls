@@ -21,7 +21,7 @@ authconfig:
 /etc/init.d/removefromipa:
   file:
     - managed
-    - source: salt://qatp/etc/init.d/removefrompia
+    - source: salt://qatp/etc/init.d/removefromipa
     - template: jinja
     - user: root
     - group: root
@@ -41,27 +41,26 @@ removefromipa:
     - require:
       - cmd: chkconfig
 
-/etc/sudoers:
+/etc/sudoers.d/ipa:
   file:
-    - append 
+    - managed
     - template: jinja
-    - sources: 
-      - salt://qatp/etc/sudoers
+    - source: salt://qatp/etc/sudoers
+    - mode: 400
 
 /root/.ssh/config:
   file:
-    - append
+    - managed 
     - template: jinja
     - user: root
     - group: root
     - mode: 600
-    - sources:
-        - salt://qatp/home/sshfs_config
+    - source: salt://qatp/ipa/sshfs_config
 
 /root/.ssh/sshfs_id_rsa:
   file:
     - managed
-    - source: salt://qatp/home/sshfs_id_rsa
+    - source: salt://qatp/ipa/sshfs_id_rsa
     - template: jinja
     - user: root
     - group: root
@@ -70,7 +69,7 @@ removefromipa:
 /root/.ssh/sshfs_id_rsa.pub:
   file:
     - managed
-    - source: salt://qatp/home/sshfs_id_rsa.pub
+    - source: salt://qatp/ipa/sshfs_id_rsa.pub
     - template: jinja
     - user: root
     - group: root
@@ -84,6 +83,10 @@ removefromipa:
     - user: root
     - group: root
     - mode: 644
+  service:
+    - running
+    - name: autofs
+    - enable: true
 
 /etc/autofs_ldap_auth.conf:
   file:
@@ -106,9 +109,16 @@ removefromipa:
     - user: root
     - minute: 1
 
+/etc/nsswitch.conf:
+  file:
+    - replace
+    - pattern: '^automount.*'
+    - repl: 'automount: files ldap'
+
 install_ipa:
   cmd:
     - script
+    - template: jinja
     - user: root
     - source: salt://qatp/ipa/scripts/install_ipa.sh
 

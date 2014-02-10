@@ -24,7 +24,6 @@ pillar_defaults:
     sshfs_public_key: MUST_PROVIDE_VALUE
     ldap_uris: MUST_PROVIDE_LIST
     search_base: MUST_PROVIDE_VALUE
-    clientprinc: MUST_PROVIDE_VALUE
     client_domain: MUST_PROVIDE_VALUE
     server: MUST_PROVIDE_VALUE
     realm: MUST_PROVIDE_VALUE

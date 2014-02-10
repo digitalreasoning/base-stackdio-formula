@@ -7,5 +7,5 @@ while [ $value -gt 3600 ] ; do
 done
 sleep $value
 
-/etc/init.d/autofs reload
+/sbin/service autofs reload
 
