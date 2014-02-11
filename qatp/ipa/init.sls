@@ -17,6 +17,7 @@ authconfig:
     - run
     - name: "authconfig --enablemkhomedir --updateall"
     - user: root
+    - unless: "service sssd status"
 
 /etc/init.d/removefromipa:
   file:
@@ -27,11 +28,13 @@ authconfig:
     - group: root
     - mode: 755
 
+# removefromipa  	0:on	1:off	2:off	3:on	4:off	5:on	6:off
 removefromipa_chkconfig:
   cmd:
     - run
     - name: "chkconfig --add removefromipa && chkconfig removefromipa --level 0 on"
     - user: root
+    - unless: "chkconfig --list removefromipa"
     - require:
       - file: /etc/init.d/removefromipa
 
@@ -115,6 +118,13 @@ install_ipa:
     - template: jinja
     - user: root
     - source: salt://qatp/ipa/scripts/install_ipa.sh
+    - unless: "klist -k /etc/krb5.keytab"
+
+sssd:
+  service:
+    - running
+    - require:
+      - cmd: install_ipa
 
 /etc/nsswitch.conf:
   file:
@@ -126,9 +136,11 @@ install_ipa:
 
 restart_autofs:
   cmd:
-    - run
+    - wait
     - name: "service autofs restart"
     - user: root
+    - watch: 
+      - file: /etc/nsswitch.conf
     - require:
       - file: /etc/nsswitch.conf
 
