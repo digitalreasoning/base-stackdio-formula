@@ -12,12 +12,20 @@ ipa_packages:
       - fprintd-pam
       - autofs
 
+messagebus:
+  service:
+    - running
+    - require:
+      - pkg: ipa_packages
+
 authconfig:
   cmd:
     - run
     - name: "authconfig --enablemkhomedir --updateall"
     - user: root
     - unless: "service sssd status"
+    - require:
+      - service: messagebus
 
 /etc/init.d/removefromipa:
   file:
