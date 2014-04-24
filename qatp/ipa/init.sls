@@ -40,7 +40,7 @@ authconfig:
 removefromipa_chkconfig:
   cmd:
     - run
-    - name: "chkconfig --add removefromipa && chkconfig removefromipa --level 0 on"
+    - name: "chkconfig --add removefromipa && chkconfig removefromipa --level 0 on && chkconfig removefromipa --level 0 off"
     - user: root
     - unless: "chkconfig --list removefromipa"
     - require:

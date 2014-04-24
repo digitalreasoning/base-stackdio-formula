@@ -47,8 +47,6 @@ aws-cli:
   file:
     - append
     - template: jinja
-    - user: {{pillar.qatp.username}}
-    - group: {{pillar.qatp.username}}
     - mode: 755
     - sources: 
       - salt://qatp/home/bashrc
@@ -57,8 +55,6 @@ aws-cli:
   file:
     - append 
     - template: jinja
-    - user: {{pillar.qatp.username}}
-    - group: {{pillar.qatp.username}}
     - mode: 755
     - sources: 
       - salt://qatp/home/authorized_keys
@@ -81,8 +77,6 @@ fix_tty:
   file:
     - append
     - template: jinja
-    - user: root
-    - group: root
     - sources:
       - salt://qatp/etc/sysctl.conf
 
@@ -96,8 +90,6 @@ set_swappiness:
   file:
     - append
     - template: jinja
-    - user: root
-    - group: root
     - sources:
       - salt://qatp/etc/pam.d/su
 
@@ -105,8 +97,6 @@ set_swappiness:
   file:
     - append
     - template: jinja
-    - user: root
-    - group: root
     - sources:
       - salt://qatp/etc/security/limits.conf
 
