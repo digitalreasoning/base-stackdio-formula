@@ -18,6 +18,7 @@
     - user: {{pillar.qatp.username}}
     - group: {{pillar.qatp.username}}
     - mode: 755
+    - makedirs: true
 
 base_packages:
   pkg:
@@ -56,6 +57,7 @@ aws-cli:
     - append 
     - template: jinja
     - mode: 755
+    - makedirs: true
     - sources: 
       - salt://qatp/home/authorized_keys
 
