@@ -62,6 +62,7 @@ removefromipa:
 /root/.ssh/config:
   file:
     - managed 
+    - makedirs: true
     - template: jinja
     - user: root
     - group: root
@@ -71,6 +72,7 @@ removefromipa:
 /root/.ssh/sshfs_id_rsa:
   file:
     - managed
+    - makedirs: true
     - source: salt://qatp/ipa/sshfs_id_rsa
     - template: jinja
     - user: root
@@ -80,6 +82,7 @@ removefromipa:
 /root/.ssh/sshfs_id_rsa.pub:
   file:
     - managed
+    - makedirs: true
     - source: salt://qatp/ipa/sshfs_id_rsa.pub
     - template: jinja
     - user: root
@@ -89,6 +92,7 @@ removefromipa:
 /etc/sysconfig/autofs:
   file:
     - managed
+    - makedirs: true
     - source: salt://qatp/etc/sysconfig/autofs
     - template: jinja
     - user: root
@@ -111,6 +115,7 @@ removefromipa:
 /usr/local/scripts/autofs.reload.sh:
   file:
     - managed
+    - makedirs: true
     - source: salt://qatp/ipa/scripts/autofs.reload.sh
     - template: jinja
     - user: root

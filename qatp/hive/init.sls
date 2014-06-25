@@ -2,6 +2,7 @@
 /home/{{pillar.__stackdio__.username}}/.hiverc:
   file:
     - managed
+    - makedirs: true
     - template: jinja
     - source: salt://qatp/hive/hiverc
 

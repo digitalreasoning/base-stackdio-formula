@@ -4,6 +4,7 @@
 /home/{{pillar.qatp.username}}/.s3cfg:
   file:
     - managed
+    - makedirs: true
     - source: salt://qatp/home/s3cfg
     - template: jinja
     - user: {{pillar.qatp.username}}
@@ -13,6 +14,7 @@
 /home/{{pillar.qatp.username}}/.aws/config:
   file:
     - managed
+    - makedirs: true
     - source: salt://qatp/home/aws_config
     - template: jinja
     - user: {{pillar.qatp.username}}
@@ -39,6 +41,7 @@ aws-cli:
 /home/{{pillar.qatp.username}}/.vimrc:
   file:
     - managed
+    - makedirs: true
     - source: salt://qatp/home/vimrc
     - user: {{pillar.qatp.username}}
     - group: {{pillar.qatp.username}}
