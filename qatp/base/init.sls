@@ -31,6 +31,7 @@ base_packages:
       - createrepo
       - ntp
       - zsh
+      - sysstat
 
 aws-cli:
   pip.installed:
