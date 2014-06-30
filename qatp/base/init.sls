@@ -30,6 +30,7 @@ base_packages:
       - screen
       - createrepo
       - ntp
+      - zsh
 
 aws-cli:
   pip.installed:
@@ -104,7 +105,4 @@ set_swappiness:
     - template: jinja
     - sources:
       - salt://qatp/etc/security/limits.conf
-zsh:
-  pkg:
-    - installed
 
