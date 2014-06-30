@@ -104,4 +104,7 @@ set_swappiness:
     - template: jinja
     - sources:
       - salt://qatp/etc/security/limits.conf
+zsh:
+  pkg:
+    - installed
 
