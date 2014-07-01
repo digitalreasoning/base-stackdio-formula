@@ -30,6 +30,8 @@ base_packages:
       - screen
       - createrepo
       - ntp
+      - zsh
+      - sysstat
 
 aws-cli:
   pip.installed:
