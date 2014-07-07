@@ -74,6 +74,21 @@ aws-cli:
     - directory 
     - mode: 777
 
+/mnt1:
+  file:
+    - directory 
+    - mode: 777
+    
+/mnt2:
+  file:
+    - directory 
+    - mode: 777
+    
+/mnt3:
+  file:
+    - directory 
+    - mode: 777
+
 fix_tty:
   cmd:
     - run
