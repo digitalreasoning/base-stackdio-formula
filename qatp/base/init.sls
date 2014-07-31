@@ -1,3 +1,6 @@
+include:
+  - qatp.repo
+
 #
 # Setup AWS credentials and tools
 # 
@@ -33,6 +36,7 @@ base_packages:
       - zsh
       - sysstat
       - fish
+
 aws-cli:
   pip.installed:
     - name: awscli==1.0.0
@@ -126,4 +130,12 @@ set_swappiness:
     - template: jinja
     - sources:
       - salt://qatp/etc/security/limits.conf
+
+# actually turn on ntp
+ntpd-svc:
+  service:
+    - running
+    - name: ntpd
+    - require:
+      - pkg: base_packages
 
