@@ -32,7 +32,7 @@ base_packages:
       - ntp
       - zsh
       - sysstat
-
+      - fish
 aws-cli:
   pip.installed:
     - name: awscli==1.0.0
