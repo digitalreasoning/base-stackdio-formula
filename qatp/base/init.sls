@@ -89,6 +89,11 @@ aws-cli:
     - directory 
     - mode: 777
 
+/mnt4:
+  file:
+    - directory 
+    - mode: 777
+
 fix_tty:
   cmd:
     - run
