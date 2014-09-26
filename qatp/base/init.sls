@@ -36,6 +36,7 @@ base_packages:
       - zsh
       - sysstat
       - fish
+      - unzip
 
 aws-cli:
   pip.installed:
