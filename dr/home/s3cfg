@@ -1,6 +1,6 @@
 [default]
-access_key = {{pillar.qatp.aws_access_key}}
-secret_key = {{pillar.qatp.aws_secret_key}}
+access_key = {{pillar.dr.aws_access_key}}
+secret_key = {{pillar.dr.aws_secret_key}}
 bucket_location = US
 cloudfront_host = cloudfront.amazonaws.com
 cloudfront_resource = /2010-07-15/distribution

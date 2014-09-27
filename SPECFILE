@@ -1,23 +1,23 @@
-title: QATP Base Formula
-description: Salt formula for installing some base components in QATP
-root_path: qatp
+title: Base stackdio Formula
+description: Salt formula for installing some base components
+root_path: dr
 components:
-  - title: BaseQATP
-    description: QATP base formula
-    sls_path: qatp.base
+  - title: Base
+    description: base formula
+    sls_path: dr.base
   - title: HivePost
-    description: Hive configuration specific to DR/QATP
-    sls_path: qatp.hive
+    description: Hive configuration specific to Synthesys
+    sls_path: dr.hive
   - title: IPA
     description: Enable IPA authentication
-    sls_path: qatp.ipa
+    sls_path: dr.ipa
 pillar_defaults:
-  qatp:
-    username: qatp_user
+  dr:
     aws_access_key: MUST_PROVIDE_VALUE
     aws_secret_key: MUST_PROVIDE_VALUE
+    aws_region: us-east-1
     authorized_keys: OPTIONAL_LIST_OF_KEYS
-    harvest_provider: hbase-cdh4
+    harvest_provider: hbase-cdh5
   ipa:
     sshfs_hostname: MUST_PROVIDE_VALUE
     sshfs_private_key: MUST_PROVIDE_VALUE

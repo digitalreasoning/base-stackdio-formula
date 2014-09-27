@@ -1,27 +1,27 @@
 include:
-  - qatp.repo
+  - dr.repo
 
 #
 # Setup AWS credentials and tools
 # 
-/home/{{pillar.qatp.username}}/.s3cfg:
+/home/{{pillar.__stackdio__.username}}/.s3cfg:
   file:
     - managed
     - makedirs: true
-    - source: salt://qatp/home/s3cfg
+    - source: salt://dr/home/s3cfg
     - template: jinja
-    - user: {{pillar.qatp.username}}
-    - group: {{pillar.qatp.username}}
+    - user: {{pillar.__stackdio__.username}}
+    - group: {{pillar.__stackdio__.username}}
     - mode: 755
 
-/home/{{pillar.qatp.username}}/.aws/config:
+/home/{{pillar.__stackdio__.username}}/.aws/config:
   file:
     - managed
     - makedirs: true
-    - source: salt://qatp/home/aws_config
+    - source: salt://dr/home/aws_config
     - template: jinja
-    - user: {{pillar.qatp.username}}
-    - group: {{pillar.qatp.username}}
+    - user: {{pillar.__stackdio__.username}}
+    - group: {{pillar.__stackdio__.username}}
     - mode: 755
     - makedirs: true
 
@@ -45,31 +45,31 @@ aws-cli:
 #
 # Some default files
 #
-/home/{{pillar.qatp.username}}/.vimrc:
+/home/{{pillar.__stackdio__.username}}/.vimrc:
   file:
     - managed
     - makedirs: true
-    - source: salt://qatp/home/vimrc
-    - user: {{pillar.qatp.username}}
-    - group: {{pillar.qatp.username}}
+    - source: salt://dr/home/vimrc
+    - user: {{pillar.__stackdio__.username}}
+    - group: {{pillar.__stackdio__.username}}
     - mode: 755
 
-/home/{{pillar.qatp.username}}/.bashrc:
+/home/{{pillar.__stackdio__.username}}/.bashrc:
   file:
     - append
     - template: jinja
     - mode: 755
     - sources: 
-      - salt://qatp/home/bashrc
+      - salt://dr/home/bashrc
 
-/home/{{pillar.qatp.username}}/.ssh/authorized_keys:
+/home/{{pillar.__stackdio__.username}}/.ssh/authorized_keys:
   file:
     - append 
     - template: jinja
     - mode: 755
     - makedirs: true
     - sources: 
-      - salt://qatp/home/authorized_keys
+      - salt://dr/home/authorized_keys
 
 # 
 # Set a variety of system configuration and permissions
@@ -110,7 +110,7 @@ fix_tty:
     - append
     - template: jinja
     - sources:
-      - salt://qatp/etc/sysctl.conf
+      - salt://dr/etc/sysctl.conf
 
 set_swappiness:
   cmd:
@@ -123,14 +123,14 @@ set_swappiness:
     - append
     - template: jinja
     - sources:
-      - salt://qatp/etc/pam.d/su
+      - salt://dr/etc/pam.d/su
 
 /etc/security/limits.conf:
   file:
     - append
     - template: jinja
     - sources:
-      - salt://qatp/etc/security/limits.conf
+      - salt://dr/etc/security/limits.conf
 
 # actually turn on ntp
 ntpd-svc:

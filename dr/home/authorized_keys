@@ -1,5 +1,5 @@
 # Keys specified in the pillar authorized_keys variable will be appended to
 # this file.  DO NOT check in actual keys.
-{% for key in pillar.qatp.authorized_keys %}
+{% for key in pillar.dr.authorized_keys %}
 {{key}}
 {% endfor %}

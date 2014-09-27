@@ -1,4 +1,0 @@
-[default]
-aws_access_key_id={{pillar.qatp.aws_access_key}}
-aws_secret_access_key={{pillar.qatp.aws_secret_key}}
-region=us-east-1

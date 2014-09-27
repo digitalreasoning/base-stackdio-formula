@@ -1,4 +1,4 @@
-qatp-base-formula
+base-stackdio-formula
 =================
 
-stackd.io formula for a number of base states specific to QATP operations.
+stackd.io formula to provide a base configuration

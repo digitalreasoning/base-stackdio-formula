@@ -30,7 +30,7 @@ authconfig:
 /etc/init.d/removefromipa:
   file:
     - managed
-    - source: salt://qatp/etc/init.d/removefromipa
+    - source: salt://dr/etc/init.d/removefromipa
     - template: jinja
     - user: root
     - group: root
@@ -56,7 +56,7 @@ removefromipa:
   file:
     - managed
     - template: jinja
-    - source: salt://qatp/etc/sudoers
+    - source: salt://dr/etc/sudoers
     - mode: 400
 
 /root/.ssh/config:
@@ -67,13 +67,13 @@ removefromipa:
     - user: root
     - group: root
     - mode: 600
-    - source: salt://qatp/ipa/sshfs_config
+    - source: salt://dr/ipa/sshfs_config
 
 /root/.ssh/sshfs_id_rsa:
   file:
     - managed
     - makedirs: true
-    - source: salt://qatp/ipa/sshfs_id_rsa
+    - source: salt://dr/ipa/sshfs_id_rsa
     - template: jinja
     - user: root
     - group: root
@@ -83,7 +83,7 @@ removefromipa:
   file:
     - managed
     - makedirs: true
-    - source: salt://qatp/ipa/sshfs_id_rsa.pub
+    - source: salt://dr/ipa/sshfs_id_rsa.pub
     - template: jinja
     - user: root
     - group: root
@@ -93,7 +93,7 @@ removefromipa:
   file:
     - managed
     - makedirs: true
-    - source: salt://qatp/etc/sysconfig/autofs
+    - source: salt://dr/etc/sysconfig/autofs
     - template: jinja
     - user: root
     - group: root
@@ -106,7 +106,7 @@ removefromipa:
 /etc/autofs_ldap_auth.conf:
   file:
     - managed
-    - source: salt://qatp/etc/autofs_ldap_auth.conf
+    - source: salt://dr/etc/autofs_ldap_auth.conf
     - template: jinja
     - user: root
     - group: root
@@ -116,7 +116,7 @@ removefromipa:
   file:
     - managed
     - makedirs: true
-    - source: salt://qatp/ipa/scripts/autofs.reload.sh
+    - source: salt://dr/ipa/scripts/autofs.reload.sh
     - template: jinja
     - user: root
     - group: root
@@ -130,7 +130,7 @@ install_ipa:
     - script
     - template: jinja
     - user: root
-    - source: salt://qatp/ipa/scripts/install_ipa.sh
+    - source: salt://dr/ipa/scripts/install_ipa.sh
     - unless: "klist -k /etc/krb5.keytab"
 
 sssd:

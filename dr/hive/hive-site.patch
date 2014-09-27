@@ -1,7 +1,7 @@
 43a44,53
 >      <property>
 >          <name>com.digitalreasoning.harvest.provider</name>
->          <value>{{pillar.qatp.harvest_provider}}</value>
+>          <value>{{pillar.dr.harvest_provider}}</value>
 >      </property>
 >  
 >      <property>
