@@ -1,6 +1,15 @@
 include:
   - dr.repo
 
+# turn off iptables
+{% for svc in [ "iptables", "ip6tables"] %}
+disable-{{svc}}:
+  service:
+    - dead
+    - name: {{svc}}
+    - enable: false
+{% endfor %}
+
 #
 # Setup AWS credentials and tools
 # 
