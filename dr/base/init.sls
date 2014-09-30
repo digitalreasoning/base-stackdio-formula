@@ -25,22 +25,27 @@ include:
     - mode: 755
     - makedirs: true
 
+# listing packages alphabetically for some sanity
 base_packages:
   pkg:
     - installed
     - pkgs: 
+      - createrepo
+      - fish
+      - ntp
+      - python-pip
       - s3cmd
       - screen
-      - createrepo
-      - ntp
-      - zsh
       - sysstat
-      - fish
+      - tmux
       - unzip
+      - zsh
 
 aws-cli:
   pip.installed:
-    - name: awscli==1.0.0
+    - name: awscli==1.4.4
+    - require:
+      - pkg: base_packages
 
 #
 # Some default files
