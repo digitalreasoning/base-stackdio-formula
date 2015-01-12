@@ -58,7 +58,7 @@ removefromipa:
     - source: salt://dr/etc/ssh/sshd_config
     - user: root
     - group: root
-    - mode: 755
+    - mode: 600
 
 /etc/sudoers.d/ipa:
   file:
