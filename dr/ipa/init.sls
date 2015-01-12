@@ -5,7 +5,7 @@
 ipa_packages:
   pkg:
     - installed
-    - pkgs: 
+    - pkgs:
       - authconfig
       - fuse-sshfs
       - ipa-client
@@ -52,6 +52,14 @@ removefromipa:
     - require:
       - cmd: removefromipa_chkconfig
 
+/etc/ssh/sshd_config:
+  file:
+    - managed
+    - source: salt://dr/etc/ssh/sshd_config
+    - user: root
+    - group: root
+    - mode: 600
+
 /etc/sudoers.d/ipa:
   file:
     - managed
@@ -61,7 +69,7 @@ removefromipa:
 
 /root/.ssh/config:
   file:
-    - managed 
+    - managed
     - makedirs: true
     - template: jinja
     - user: root
@@ -152,8 +160,7 @@ restart_autofs:
     - wait
     - name: "service autofs restart"
     - user: root
-    - watch: 
+    - watch:
       - file: /etc/nsswitch.conf
     - require:
       - file: /etc/nsswitch.conf
-
