@@ -12,7 +12,7 @@ disable-{{svc}}:
 
 #
 # Setup AWS credentials and tools
-# 
+#
 /home/{{pillar.__stackdio__.username}}/.s3cfg:
   file:
     - managed
@@ -38,7 +38,7 @@ disable-{{svc}}:
 base_packages:
   pkg:
     - installed
-    - pkgs: 
+    - pkgs:
       - createrepo
       - fish
       - ntp
@@ -73,44 +73,44 @@ aws-cli:
     - append
     - template: jinja
     - mode: 755
-    - sources: 
+    - sources:
       - salt://dr/home/bashrc
 
 /home/{{pillar.__stackdio__.username}}/.ssh/authorized_keys:
   file:
-    - append 
+    - append
     - template: jinja
     - mode: 755
     - makedirs: true
-    - sources: 
+    - sources:
       - salt://dr/home/authorized_keys
 
-# 
+#
 # Set a variety of system configuration and permissions
 #
 /mnt:
   file:
-    - directory 
+    - directory
     - mode: 777
 
 /mnt1:
   file:
-    - directory 
+    - directory
     - mode: 777
-    
+
 /mnt2:
   file:
-    - directory 
+    - directory
     - mode: 777
-    
+
 /mnt3:
   file:
-    - directory 
+    - directory
     - mode: 777
 
 /mnt4:
   file:
-    - directory 
+    - directory
     - mode: 777
 
 fix_tty:
@@ -146,11 +146,16 @@ set_swappiness:
     - sources:
       - salt://dr/etc/security/limits.conf
 
+{% set ntp_svc = salt['grains.filter_by']({
+  'Debian': 'ntp',
+  'RedHat': 'ntpd'
+}) %}
+
 # actually turn on ntp
 ntpd-svc:
   service:
     - running
-    - name: ntpd
+    {% if
+    - name: {{ ntp_svc }}
     - require:
       - pkg: base_packages
-
