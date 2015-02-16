@@ -155,7 +155,6 @@ set_swappiness:
 ntpd-svc:
   service:
     - running
-    {% if
     - name: {{ ntp_svc }}
     - require:
       - pkg: base_packages
