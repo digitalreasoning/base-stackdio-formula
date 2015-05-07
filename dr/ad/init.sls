@@ -13,6 +13,7 @@ ad_packages:
       - ntp
       - sssd
       - nscd
+      - autofs
 
 /etc/resolv.conf:
   file:
@@ -57,8 +58,9 @@ authconfig:
 
 /etc/nsswitch.conf:
   file:
-    - append
-    - text: 'automount:  files ldap'
+    - replace
+    - text: 'automount: .*'
+    - repl: 'automount: files ldap'
     - require:
       - pkg: ad_packages
 
@@ -130,6 +132,7 @@ autofs:
     - require:
       - pkg: ad_packages
       - cmd: authconfig
+      - service: sssd
     - watch:
       - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf

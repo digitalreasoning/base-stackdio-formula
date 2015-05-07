@@ -25,6 +25,7 @@ pillar_defaults:
       nameservers:
         - MUST_PROVIDE_LIST
       ldap_server: MUST_PROVIDE_VALUE
+      ldap_bind_dn:
       ldap_bind_password:
       ldap_base_dn:
       ldap_access_filter:
