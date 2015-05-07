@@ -1,0 +1,7 @@
+MAP_OBJECT_CLASS="nisMap"
+ENTRY_OBJECT_CLASS="nisObject"
+MAP_ATTRIBUTE="nisMapName"
+ENTRY_ATTRIBUTE="cn"
+VALUE_ATTRIBUTE="nisMapEntry"
+LDAP_URI="ldap:///{{ pillar.dr.ad.ldap_base_dn }}"
+SEARCH_BASE="cn=default,cn=automount,{{ pillar.dr.ad.ldap_base_dn }}"

@@ -28,4 +28,15 @@ pillar_defaults:
     server: MUST_PROVIDE_VALUE
     realm: MUST_PROVIDE_VALUE
     client_password: MUST_PROVIDE_VALUE
+  ad:
+    nameservers:
+      - MUST_PROVIDE_LIST
+    ldap_server: MUST_PROVIDE_VALUE
+    ldap_bind_password:
+    ldap_base_dn:
+    ldap_access_filter:
+    krb5_realm:
+    krb5_kdc:
+    krb5_admin_server:
+    idmap_domain:
 
