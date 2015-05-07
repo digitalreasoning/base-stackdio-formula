@@ -35,7 +35,7 @@ authconfig:
 
 /etc/sssd/sssd.conf:
   file:
-    - mananged
+    - managed
     - source: salt://dr/etc/sssd/sssd.conf
     - template: jinja
     - user: root

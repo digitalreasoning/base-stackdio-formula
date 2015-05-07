@@ -21,6 +21,17 @@ pillar_defaults:
     aws_region: us-east-1
     authorized_keys: OPTIONAL_LIST_OF_KEYS
     harvest_provider: hbase-cdh5
+    ad:
+      nameservers:
+        - MUST_PROVIDE_LIST
+      ldap_server: MUST_PROVIDE_VALUE
+      ldap_bind_password:
+      ldap_base_dn:
+      ldap_access_filter:
+      krb5_realm:
+      krb5_kdc:
+      krb5_admin_server:
+      idmap_domain:
   ipa:
     sshfs_hostname: MUST_PROVIDE_VALUE
     sshfs_private_key: MUST_PROVIDE_VALUE
@@ -31,15 +42,5 @@ pillar_defaults:
     server: MUST_PROVIDE_VALUE
     realm: MUST_PROVIDE_VALUE
     client_password: MUST_PROVIDE_VALUE
-  ad:
-    nameservers:
-      - MUST_PROVIDE_LIST
-    ldap_server: MUST_PROVIDE_VALUE
-    ldap_bind_password:
-    ldap_base_dn:
-    ldap_access_filter:
-    krb5_realm:
-    krb5_kdc:
-    krb5_admin_server:
-    idmap_domain:
+
 
