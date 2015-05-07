@@ -8,6 +8,9 @@ components:
   - title: HivePost
     description: Hive configuration specific to Synthesys
     sls_path: dr.hive
+  - title: AD
+    description: Enable Active Directory authentication
+    sls_path: dr.ad
   - title: IPA
     description: Enable IPA authentication
     sls_path: dr.ipa
