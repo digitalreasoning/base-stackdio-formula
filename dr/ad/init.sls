@@ -60,7 +60,7 @@ authconfig:
   file:
     - replace
     - pattern: 'automount: .*'
-    - repl: 'automount: files ldap'
+    - repl: 'automount:  files ldap'
     - require:
       - pkg: ad_packages
 
