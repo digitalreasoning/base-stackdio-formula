@@ -90,6 +90,7 @@ authconfig:
   file:
     - managed
     - source: salt://dr/etc/autofs_ldap_auth_ad.conf
+    - template: jinja
     - user: root
     - group: root
     - mode: 644
