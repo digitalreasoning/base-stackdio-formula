@@ -59,7 +59,7 @@ authconfig:
 /etc/nsswitch.conf:
   file:
     - replace
-    - text: 'automount: .*'
+    - pattern: 'automount: .*'
     - repl: 'automount: files ldap'
     - require:
       - pkg: ad_packages
