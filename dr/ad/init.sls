@@ -14,6 +14,7 @@ ad_packages:
       - sssd
       - nscd
       - autofs
+      - nfs-utils
 
 /etc/resolv.conf:
   file:
@@ -134,6 +135,36 @@ autofs:
       - pkg: ad_packages
       - cmd: authconfig
       - service: sssd
+    - watch:
+      - file: /etc/resolv.conf
+      - file: /etc/sssd/sssd.conf
+      - file: /etc/krb5.conf
+      - file: /etc/nsswitch.conf
+      - file: /etc/idmapd.conf
+      - file: /etc/sysconfig/autofs
+      - file: /etc/autofs_ldap_auth.conf
+      - file: /etc/sudoers
+
+rpcbind:
+  service:
+    - running
+    - require:
+      - service: autofs
+    - watch:
+      - file: /etc/resolv.conf
+      - file: /etc/sssd/sssd.conf
+      - file: /etc/krb5.conf
+      - file: /etc/nsswitch.conf
+      - file: /etc/idmapd.conf
+      - file: /etc/sysconfig/autofs
+      - file: /etc/autofs_ldap_auth.conf
+      - file: /etc/sudoers
+
+nfs:
+  service:
+    - running
+    - require:
+      - service: rpcbind
     - watch:
       - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf
