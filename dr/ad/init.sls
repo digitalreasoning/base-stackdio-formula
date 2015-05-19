@@ -94,7 +94,7 @@ authconfig:
     - template: jinja
     - user: root
     - group: root
-    - mode: 644
+    - mode: '0600'
     - require:
       - pkg: ad_packages
 
@@ -112,44 +112,12 @@ authconfig:
     - group: root
     - mode: 755
 
-sssd:
-  service:
-    - running
-    - require:
-      - pkg: ad_packages
-      - cmd: authconfig
-    - watch:
-      - file: /etc/resolv.conf
-      - file: /etc/sssd/sssd.conf
-      - file: /etc/krb5.conf
-      - file: /etc/nsswitch.conf
-      - file: /etc/idmapd.conf
-      - file: /etc/sysconfig/autofs
-      - file: /etc/autofs_ldap_auth.conf
-      - file: /etc/sudoers
-
-autofs:
-  service:
-    - running
-    - require:
-      - pkg: ad_packages
-      - cmd: authconfig
-      - service: sssd
-    - watch:
-      - file: /etc/resolv.conf
-      - file: /etc/sssd/sssd.conf
-      - file: /etc/krb5.conf
-      - file: /etc/nsswitch.conf
-      - file: /etc/idmapd.conf
-      - file: /etc/sysconfig/autofs
-      - file: /etc/autofs_ldap_auth.conf
-      - file: /etc/sudoers
-
 rpcbind:
   service:
     - running
     - require:
-      - service: autofs
+      - pkg: ad_packages
+      - cmd: authconfig
     - watch:
       - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf
@@ -165,6 +133,36 @@ nfs:
     - running
     - require:
       - service: rpcbind
+    - watch:
+      - file: /etc/resolv.conf
+      - file: /etc/sssd/sssd.conf
+      - file: /etc/krb5.conf
+      - file: /etc/nsswitch.conf
+      - file: /etc/idmapd.conf
+      - file: /etc/sysconfig/autofs
+      - file: /etc/autofs_ldap_auth.conf
+      - file: /etc/sudoers
+
+sssd:
+  service:
+    - running
+    - require:
+      - service: nfs
+    - watch:
+      - file: /etc/resolv.conf
+      - file: /etc/sssd/sssd.conf
+      - file: /etc/krb5.conf
+      - file: /etc/nsswitch.conf
+      - file: /etc/idmapd.conf
+      - file: /etc/sysconfig/autofs
+      - file: /etc/autofs_ldap_auth.conf
+      - file: /etc/sudoers
+
+autofs:
+  service:
+    - running
+    - require:
+      - service: sssd
     - watch:
       - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf
