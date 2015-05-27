@@ -101,7 +101,7 @@ removefromipa:
   file:
     - managed
     - makedirs: true
-    - source: salt://dr/etc/sysconfig/autofs
+    - source: salt://dr/etc/sysconfig/autofs-ipa
     - template: jinja
     - user: root
     - group: root
@@ -114,7 +114,7 @@ removefromipa:
 /etc/autofs_ldap_auth.conf:
   file:
     - managed
-    - source: salt://dr/etc/autofs_ldap_auth.conf
+    - source: salt://dr/etc/autofs_ldap_auth_ipa.conf
     - template: jinja
     - user: root
     - group: root
