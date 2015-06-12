@@ -50,11 +50,19 @@ base_packages:
       - unzip
       - zsh
 
-aws-cli:
+#aws-cli:
+#  pip.installed:
+#    - name: awscli==1.4.4
+#    - require:
+#      - pkg: base_packages
+
+{% for pippkg in ["awscli==1.4.4","pygtail"] %}
+install-{{pippkg}}:
   pip.installed:
-    - name: awscli==1.4.4
+    - name: {{pippkg}}
     - require:
       - pkg: base_packages
+{% endfor %}
 
 #
 # Some default files
