@@ -50,11 +50,6 @@ base_packages:
       - unzip
       - zsh
 
-#aws-cli:
-#  pip.installed:
-#    - name: awscli==1.4.4
-#    - require:
-#      - pkg: base_packages
 
 {% for pippkg in ["awscli==1.4.4","pygtail"] %}
 install-{{pippkg}}:
@@ -84,14 +79,13 @@ install-{{pippkg}}:
     - sources:
       - salt://dr/home/bashrc
 
-/home/{{pillar.__stackdio__.username}}/.ssh/authorized_keys:
-  file:
-    - append
-    - template: jinja
-    - mode: 755
-    - makedirs: true
-    - sources:
-      - salt://dr/home/authorized_keys
+{% for sshkey in pillar.dr.authorized_keys %}
+users_authorized_keys.{{ loop.index }}:
+  ssh_auth:
+    - present
+    - user: {{ pillar.__stackdio__.username }}
+    - name: {{ sshkey }}
+{% endfor %}
 
 #
 # Set a variety of system configuration and permissions
