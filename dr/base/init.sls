@@ -79,13 +79,11 @@ install-{{pippkg}}:
     - sources:
       - salt://dr/home/bashrc
 
-{% for sshkey in pillar.dr.authorized_keys %}
-users_authorized_keys.{{ loop.index }}:
+user_authorized_keys:
   ssh_auth:
     - present
     - user: {{ pillar.__stackdio__.username }}
-    - name: {{ sshkey }}
-{% endfor %}
+    - names: {{ pillar.dr.authorized_keys }}
 
 #
 # Set a variety of system configuration and permissions
