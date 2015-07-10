@@ -83,7 +83,10 @@ user_authorized_keys:
   ssh_auth:
     - present
     - user: {{ pillar.__stackdio__.username }}
-    - names: {{ pillar.dr.authorized_keys }}
+    - names:
+      {% for key in pillar.dr.authorized_keys %}
+      {{ key }}
+      {% endfor %}
 
 #
 # Set a variety of system configuration and permissions
