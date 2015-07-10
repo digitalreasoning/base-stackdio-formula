@@ -19,7 +19,8 @@ pillar_defaults:
     aws_access_key: MUST_PROVIDE_VALUE
     aws_secret_key: MUST_PROVIDE_VALUE
     aws_region: us-east-1
-    authorized_keys: OPTIONAL_LIST_OF_KEYS
+    authorized_keys:
+      - OPTIONAL_LIST_OF_KEYS
     harvest_provider: hbase-cdh5
     ad:
       nameservers:
