@@ -40,7 +40,6 @@ base_packages:
     - installed
     - pkgs:
       - createrepo
-      - fish
       - ntp
       - python-pip
       - s3cmd
@@ -48,8 +47,8 @@ base_packages:
       - sysstat
       - tmux
       - unzip
+      - vim
       - zsh
-
 
 {% for pippkg in ["awscli==1.4.4","pygtail"] %}
 install-{{pippkg}}:
