@@ -47,7 +47,7 @@ base_packages:
       - sysstat
       - tmux
       - unzip
-      - vim
+      - vim-enhanced
       - zsh
 
 {% for pippkg in ["awscli==1.4.4","pygtail"] %}
