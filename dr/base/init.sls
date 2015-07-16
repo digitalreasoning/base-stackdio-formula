@@ -50,7 +50,7 @@ base_packages:
       - vim-enhanced
       - zsh
 
-{% for pippkg in ["awscli==1.4.4","pygtail"] %}
+{% for pippkg in ["awscli==1.4.4","pygtail","graphitesend"] %}
 install-{{pippkg}}:
   pip.installed:
     - name: {{pippkg}}
