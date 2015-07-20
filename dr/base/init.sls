@@ -1,5 +1,3 @@
-include:
-  - dr.repo
 
 # turn off iptables
 {% for svc in [ "iptables", "ip6tables"] %}
