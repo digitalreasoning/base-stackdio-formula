@@ -11,26 +11,55 @@ disable-{{svc}}:
 #
 # Setup AWS credentials and tools
 #
-/home/{{pillar.__stackdio__.username}}/.s3cfg:
+{% for user in pillar.__stackdio__.users %}
+/home/{{user.username}}/.s3cfg:
   file:
     - managed
     - makedirs: true
     - source: salt://dr/home/s3cfg
     - template: jinja
-    - user: {{pillar.__stackdio__.username}}
-    - group: {{pillar.__stackdio__.username}}
+    - user: {{ user.username }}
+    - group: {{ user.username }}
     - mode: 755
 
-/home/{{pillar.__stackdio__.username}}/.aws/config:
+/home/{{user.username}}/.aws/config:
   file:
     - managed
     - makedirs: true
     - source: salt://dr/home/aws_config
     - template: jinja
-    - user: {{pillar.__stackdio__.username}}
-    - group: {{pillar.__stackdio__.username}}
+    - user: {{ user.username }}
+    - group: {{ user.username }}
     - mode: 755
     - makedirs: true
+
+#
+# Some default files
+#
+/home/{{user.username}}/.vimrc:
+  file:
+    - managed
+    - makedirs: true
+    - source: salt://dr/home/vimrc
+    - user: {{ user.username }}
+    - group: {{ user.username }}
+    - mode: 755
+
+/home/{{user.username}}/.bashrc:
+  file:
+    - append
+    - template: jinja
+    - mode: 755
+    - sources:
+      - salt://dr/home/bashrc
+
+{{user.username}}_authorized_keys:
+  ssh_auth:
+    - present
+    - user: {{ user.username }}
+    - names: {{ pillar.dr.authorized_keys }}
+
+{% endfor %}
 
 # listing packages alphabetically for some sanity
 base_packages:
@@ -55,32 +84,6 @@ install-{{pippkg}}:
     - require:
       - pkg: base_packages
 {% endfor %}
-
-#
-# Some default files
-#
-/home/{{pillar.__stackdio__.username}}/.vimrc:
-  file:
-    - managed
-    - makedirs: true
-    - source: salt://dr/home/vimrc
-    - user: {{pillar.__stackdio__.username}}
-    - group: {{pillar.__stackdio__.username}}
-    - mode: 755
-
-/home/{{pillar.__stackdio__.username}}/.bashrc:
-  file:
-    - append
-    - template: jinja
-    - mode: 755
-    - sources:
-      - salt://dr/home/bashrc
-
-user_authorized_keys:
-  ssh_auth:
-    - present
-    - user: {{ pillar.__stackdio__.username }}
-    - names: {{ pillar.dr.authorized_keys }}
 
 #
 # Set a variety of system configuration and permissions

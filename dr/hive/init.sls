@@ -1,10 +1,12 @@
 
-/home/{{pillar.__stackdio__.username}}/.hiverc:
+{% for user in pillar.__stackdio__.users %}
+/home/{{user.username}}/.hiverc:
   file:
     - managed
     - makedirs: true
     - template: jinja
     - source: salt://dr/hive/hiverc
+{% endfor %}
 
 /etc/hive/conf/hive-site.xml:
   file:
