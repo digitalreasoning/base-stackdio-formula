@@ -45,8 +45,12 @@ base_packages:
       - sysstat
       - tmux
       - unzip
-      - vim-enhanced
       - zsh
+{% if grains["os_family"] == "RedHat" %}
+      - vim-enhanced
+{% elif grains["os_family"] == "Debian" %}
+      - vim
+{% endif %}
 
 {% for pippkg in ["awscli==1.4.4","pygtail","graphitesend"] %}
 install-{{pippkg}}:
