@@ -8,6 +8,11 @@ disable-{{svc}}:
     - enable: false
 {% endfor %}
 
+{% set vim_pkg = salt['grains.filter_by']({
+  'Debian': 'vim',
+  'RedHat': 'vim-enhanced'
+}) %}
+
 #
 # Setup AWS credentials and tools
 #
@@ -45,12 +50,8 @@ base_packages:
       - sysstat
       - tmux
       - unzip
+      - {{ vim_pkg }}
       - zsh
-{% if grains["os_family"] == "RedHat" %}
-      - vim-enhanced
-{% elif grains["os_family"] == "Debian" %}
-      - vim
-{% endif %}
 
 {% for pippkg in ["awscli==1.4.4","pygtail","graphitesend"] %}
 install-{{pippkg}}:
