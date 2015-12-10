@@ -54,21 +54,13 @@ authconfig:
     - require:
       - pkg: ad_packages
 
-patch_sshd_command:
+/etc/ssh/sshd_config:
   file:
     - replace
-    - name: /etc/ssh/sshd_config
     - pattern: '#AuthorizedKeysCommand .*'
     - repl: 'AuthorizedKeysCommand /usr/bin/sss_ssh_authorizedkeys'
     - require:
       - pkg: ad_packages
-
-patch_sshd_user:
-  file:
-    - replace
-    - name: /etc/ssh/sshd_config
-    - pattern: '#AuthorizedKeysCommandRunAs .*'
-    - repl: 'AuthorizedKeysCommandRunAs root'
 
 /etc/sudoers:
   file:
@@ -81,8 +73,7 @@ sshd:
   service:
     - running
     - watch:
-      - file: patch_sshd_command
-      - file: patch_sshd_user
+      - file: /etc/ssh/sshd_config
 
 sssd:
   service:
