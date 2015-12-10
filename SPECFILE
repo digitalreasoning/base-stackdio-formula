@@ -11,6 +11,9 @@ components:
   - title: AD
     description: Enable Active Directory authentication
     sls_path: dr.ad
+  - title: AWS Directory Service
+    description: Enable authentication from an AWS Directory Service directory
+    sls_path: dr.awsds
   - title: IPA
     description: Enable IPA authentication
     sls_path: dr.ipa
@@ -23,8 +26,8 @@ pillar_defaults:
       - OPTIONAL_LIST_OF_KEYS
     harvest_provider: hbase-cdh5
     ad:
-      nameservers:
-        - MUST_PROVIDE_LIST
+      nameservers: []
+      allow_group:
       ldap_server: MUST_PROVIDE_VALUE
       ldap_bind_dn:
       ldap_bind_password:
