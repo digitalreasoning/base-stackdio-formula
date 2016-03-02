@@ -23,8 +23,6 @@ pillar_defaults:
       - OPTIONAL_LIST_OF_KEYS
     harvest_provider: hbase-cdh5
     ad:
-      nameservers:
-        - MUST_PROVIDE_LIST
       ldap_server: MUST_PROVIDE_VALUE
       ldap_bind_dn:
       ldap_bind_password:

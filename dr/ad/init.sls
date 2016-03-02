@@ -16,17 +16,6 @@ ad_packages:
       - autofs
       - nfs-utils
 
-/etc/resolv.conf:
-  file:
-    - managed
-    - source: salt://dr/etc/resolv.conf
-    - template: jinja
-    - user: root
-    - group: root
-    - mode: 644
-    - require:
-      - pkg: ad_packages
-
 authconfig:
   cmd:
     - run
