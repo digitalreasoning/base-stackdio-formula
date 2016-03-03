@@ -22,7 +22,7 @@ authconfig:
     - name: authconfig --enableshadow --enableldap --ldapserver={{ pillar.dr.ad.ldap_server }} --ldapbasedn={{ pillar.dr.ad.ldap_base_dn }} --disableldaptls --enablekrb5 --enablekrb5kdcdns --enablesssd --enablesssdauth --krb5realm={{ pillar.dr.ad.krb5_realm }} --krb5adminserver={{ pillar.dr.ad.krb5_admin_server }} --updateall
     - user: root
     - require:
-      - file: /etc/resolv.conf
+      - pkg: ad_packages
 
 /etc/sssd/sssd.conf:
   file:
@@ -108,7 +108,6 @@ rpcbind:
       - pkg: ad_packages
       - cmd: authconfig
     - watch:
-      - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
       - file: /etc/nsswitch.conf
@@ -123,7 +122,6 @@ nfs:
     - require:
       - service: rpcbind
     - watch:
-      - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
       - file: /etc/nsswitch.conf
@@ -138,7 +136,6 @@ sssd:
     - require:
       - service: nfs
     - watch:
-      - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
       - file: /etc/nsswitch.conf
@@ -153,7 +150,6 @@ autofs:
     - require:
       - service: sssd
     - watch:
-      - file: /etc/resolv.conf
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
       - file: /etc/nsswitch.conf
