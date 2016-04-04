@@ -5,13 +5,18 @@
 # install Active Directory for authentication
 #
 
+{% set pam_ldap_pkg = salt['grains.filter_by']({
+  '6': 'pam_ldap',
+  '7': 'nss-pam-ldapd',
+}, grain='osmajorrelease') %}
+
 ad_packages:
   pkg:
     - installed
     - pkgs:
       - openldap
       - pam
-      - pam_ldap
+      - {{ pam_ldap_pkg }}
       - pam_krb5
       - ntp
       - sssd
