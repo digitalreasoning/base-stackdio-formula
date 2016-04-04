@@ -23,14 +23,12 @@ pillar_defaults:
       - OPTIONAL_LIST_OF_KEYS
     harvest_provider: hbase-cdh5
     ad:
-      ldap_server: MUST_PROVIDE_VALUE
+      server_fqdn: MUST_PROVIDE_VALUE
       ldap_bind_dn:
       ldap_bind_password:
       ldap_base_dn:
       ldap_access_filter:
       krb5_realm:
-      krb5_kdc:
-      krb5_admin_server:
       idmap_domain:
   ipa:
     sshfs_hostname: MUST_PROVIDE_VALUE

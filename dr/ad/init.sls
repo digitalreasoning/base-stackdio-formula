@@ -1,3 +1,6 @@
+{%- set server_fqdn = pillar.dr.ad.server_fqdn -%}
+{%- set base_dn = pillar.dr.ad.ldap_base_dn -%}
+{%- set krb5_realm = pillar.dr.ad.krb5_realm -%}
 #
 # install Active Directory for authentication
 #
@@ -19,7 +22,7 @@ ad_packages:
 authconfig:
   cmd:
     - run
-    - name: authconfig --enableshadow --enableldap --ldapserver={{ pillar.dr.ad.ldap_server }} --ldapbasedn={{ pillar.dr.ad.ldap_base_dn }} --disableldaptls --enablekrb5 --enablekrb5kdcdns --enablesssd --enablesssdauth --krb5realm={{ pillar.dr.ad.krb5_realm }} --krb5adminserver={{ pillar.dr.ad.krb5_admin_server }} --updateall
+    - name: authconfig --enableshadow --enableldap --ldapserver={{ server_fqdn }} --ldapbasedn={{ base_dn }} --disableldaptls --enablekrb5 --enablekrb5kdcdns --enablesssd --enablesssdauth --krb5realm={{ krb5_realm }} --krb5adminserver={{ server_fqdn }} --updateall
     - user: root
     - require:
       - pkg: ad_packages
