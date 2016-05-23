@@ -61,6 +61,11 @@ authconfig:
     - repl: 'automount:  files ldap'
     - require:
       - pkg: ad_packages
+    - watch_in:
+      - service: rpcbind
+      - service: nfs
+      - service: sssd
+      - service: autofs
 
 /etc/idmapd.conf:
   file:
@@ -115,7 +120,6 @@ rpcbind:
     - require:
       - pkg: ad_packages
       - cmd: authconfig
-      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
@@ -129,7 +133,6 @@ nfs:
     - running
     - require:
       - service: rpcbind
-      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
@@ -143,7 +146,6 @@ sssd:
     - running
     - require:
       - service: nfs
-      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
@@ -157,7 +159,6 @@ autofs:
     - running
     - require:
       - service: sssd
-      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
