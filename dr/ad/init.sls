@@ -165,3 +165,24 @@ autofs:
       - file: /etc/sysconfig/autofs
       - file: /etc/autofs_ldap_auth.conf
       - file: /etc/sudoers
+
+# Run these 2 again to fix the issue with AD failing to work
+authconfig2:
+  cmd:
+    - run
+    - name: authconfig --enableshadow --enableldap --ldapserver={{ pillar.dr.ad.ldap_server }} --ldapbasedn={{ pillar.dr.ad.ldap_base_dn }} --disableldaptls --enablekrb5 --enablekrb5kdcdns --enablesssd --enablesssdauth --krb5realm={{ pillar.dr.ad.krb5_realm }} --krb5adminserver={{ pillar.dr.ad.krb5_admin_server }} --updateall
+    - user: root
+    - require:
+      - service: rpcbind
+      - service: nfs
+      - service: sssd
+      - service: autofs
+
+nsswitch2:
+  file:
+    - replace
+    - name: /etc/nsswitch.conf
+    - pattern: 'automount: .*'
+    - repl: 'automount:  files ldap'
+    - require:
+      - cmd: authconfig2
