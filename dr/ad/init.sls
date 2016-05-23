@@ -115,10 +115,10 @@ rpcbind:
     - require:
       - pkg: ad_packages
       - cmd: authconfig
+      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
-      - file: /etc/nsswitch.conf
       - file: /etc/idmapd.conf
       - file: /etc/sysconfig/autofs
       - file: /etc/autofs_ldap_auth.conf
@@ -129,10 +129,10 @@ nfs:
     - running
     - require:
       - service: rpcbind
+      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
-      - file: /etc/nsswitch.conf
       - file: /etc/idmapd.conf
       - file: /etc/sysconfig/autofs
       - file: /etc/autofs_ldap_auth.conf
@@ -143,10 +143,10 @@ sssd:
     - running
     - require:
       - service: nfs
+      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
-      - file: /etc/nsswitch.conf
       - file: /etc/idmapd.conf
       - file: /etc/sysconfig/autofs
       - file: /etc/autofs_ldap_auth.conf
@@ -157,10 +157,10 @@ autofs:
     - running
     - require:
       - service: sssd
+      - file: /etc/nsswitch.conf
     - watch:
       - file: /etc/sssd/sssd.conf
       - file: /etc/krb5.conf
-      - file: /etc/nsswitch.conf
       - file: /etc/idmapd.conf
       - file: /etc/sysconfig/autofs
       - file: /etc/autofs_ldap_auth.conf
