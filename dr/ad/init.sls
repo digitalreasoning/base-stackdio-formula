@@ -167,7 +167,7 @@ autofs:
       - file: /etc/autofs_ldap_auth.conf
       - file: /etc/sudoers
 
-# Run these 2 again to fix the issue with AD failing to work
+# Run this again to fix the issue with AD failing to work
 authconfig2:
   cmd:
     - run
@@ -178,12 +178,3 @@ authconfig2:
       - service: nfs
       - service: sssd
       - service: autofs
-
-nsswitch2:
-  file:
-    - replace
-    - name: /etc/nsswitch.conf
-    - pattern: 'automount: .*'
-    - repl: 'automount:  files ldap'
-    - require:
-      - cmd: authconfig2
