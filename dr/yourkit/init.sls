@@ -1,23 +1,26 @@
 
-
-{#download-yourkit:#}
-{#  cmd:#}
-{#    - run#}
-{#    - name: curl -o {{ pillar.dr.yourkit.install_path }} https://www.yourkit.com/download/{{ pillar.dr.yourkit.version }}-linux.tar.bz2#}
-{#    - user: root#}
-{##}
-{#unpack-yourkit:#}
-{#  cmd:#}
-{#    - run#}
-{#    - name: tar xf#}
-
-
-yourkit-binaries:
-  archive:
-    - extracted
+install-dir:
+  file:
+    - directory
     - name: {{ pillar.dr.yourkit.install_path }}
-    - source: https://www.yourkit.com/download/{{ pillar.dr.yourkit.version }}-linux.tar.bz2
-    - archive_format: tar
     - user: root
     - group: root
-    - if_missing: {{ pillar.dr.yourkit.install_path }}/{{ pillar.dr.yourkit.version }}
+
+download-yourkit:
+  cmd:
+    - run
+    - name: curl -O https://www.yourkit.com/download/{{ pillar.dr.yourkit.version }}-linux.tar.bz2
+    - cwd: {{ pillar.dr.yourkit.install_path }}
+    - user: root
+    - require:
+      - file: install-dir
+
+unpack-yourkit:
+  cmd:
+    - run
+    - name: tar xf {{ pillar.dr.yourkit.version }}-linux.tar.bz2
+    - cwd: {{ pillar.dr.yourkit.install_path }}
+    - user: root
+    - unless: test -d {{ pillar.dr.yourkit.install_path }}/{{ pillar.dr.yourkit.version }}
+    - require:
+      - cmd: download-yourkit
