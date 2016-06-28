@@ -11,9 +11,10 @@ components:
   - title: AD
     description: Enable Active Directory authentication
     sls_path: dr.ad
-  - title: IPA
-    description: Enable IPA authentication
-    sls_path: dr.ipa
+  - title: Yourkit
+    description: Install yourkit binaries
+    sls_path: dr.yourkit
+
 pillar_defaults:
   dr:
     aws_access_key: MUST_PROVIDE_VALUE
@@ -30,15 +31,6 @@ pillar_defaults:
       ldap_access_filter:
       krb5_realm:
       idmap_domain:
-  ipa:
-    sshfs_hostname: MUST_PROVIDE_VALUE
-    sshfs_private_key: MUST_PROVIDE_VALUE
-    sshfs_public_key: MUST_PROVIDE_VALUE
-    ldap_uris: MUST_PROVIDE_LIST
-    search_base: MUST_PROVIDE_VALUE
-    client_domain: MUST_PROVIDE_VALUE
-    server: MUST_PROVIDE_VALUE
-    realm: MUST_PROVIDE_VALUE
-    client_password: MUST_PROVIDE_VALUE
-
-
+    yourkit:
+      version: yjp-2015-build-15088
+      install_path: /mnt/yourkit
