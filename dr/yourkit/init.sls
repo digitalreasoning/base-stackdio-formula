@@ -1,4 +1,8 @@
 
+bzip2:
+  pkg:
+    - installed
+
 install-dir:
   file:
     - directory
@@ -23,4 +27,5 @@ unpack-yourkit:
     - user: root
     - unless: test -d {{ pillar.dr.yourkit.install_path }}/{{ pillar.dr.yourkit.version }}
     - require:
+      - pkg: bzip2
       - cmd: download-yourkit
