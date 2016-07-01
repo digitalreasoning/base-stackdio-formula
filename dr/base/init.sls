@@ -164,6 +164,8 @@ ntpd-svc:
     - require:
       - pkg: base_packages
 
+{% if pillar.dr.cloudhealth.install %}
+
 # Cloud health things
 install-script:
   cmd:
@@ -174,7 +176,9 @@ install-script:
 run-script:
   cmd:
     - run
-    - name: sh /tmp/cloudhealth.sh 14 {{ pillar.dr.cloudhealth_key }} aws
+    - name: sh /tmp/cloudhealth.sh 14 {{ pillar.dr.cloudhealth.key }} aws
     - user: root
     - require:
       - cmd: install-script
+
+{% endif %}
