@@ -23,6 +23,7 @@ pillar_defaults:
     authorized_keys:
       - OPTIONAL_LIST_OF_KEYS
     harvest_provider: hbase-cdh5
+    cloudhealth_key: MUST_PROVIDE_VALUE
     ad:
       server_fqdn: MUST_PROVIDE_VALUE
       ldap_bind_dn:
