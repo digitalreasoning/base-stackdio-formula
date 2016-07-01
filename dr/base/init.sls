@@ -163,3 +163,23 @@ ntpd-svc:
     - name: {{ ntp_svc }}
     - require:
       - pkg: base_packages
+
+{% if pillar.dr.cloudhealth.install %}
+
+# Cloud health things
+install-script:
+  cmd:
+    - run
+    - name: curl -o /tmp/cloudhealth.sh https://s3.amazonaws.com/remote-collector/agent/v14/install_cht_perfmon.sh
+    - user: root
+
+run-script:
+  cmd:
+    - run
+    - name: sh cloudhealth.sh 14 {{ pillar.dr.cloudhealth.key }} aws
+    - user: root
+    - cwd: /tmp
+    - require:
+      - cmd: install-script
+
+{% endif %}
