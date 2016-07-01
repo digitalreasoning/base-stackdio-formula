@@ -176,8 +176,9 @@ install-script:
 run-script:
   cmd:
     - run
-    - name: sh /tmp/cloudhealth.sh 14 {{ pillar.dr.cloudhealth.key }} aws
+    - name: sh cloudhealth.sh 14 {{ pillar.dr.cloudhealth.key }} aws
     - user: root
+    - cwd: /tmp
     - require:
       - cmd: install-script
 
