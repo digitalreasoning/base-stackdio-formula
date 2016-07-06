@@ -79,6 +79,7 @@ base_packages:
       - sysstat
       - tmux
       - unzip
+      - wget
       - {{ vim_pkg }}
       - zsh
 
@@ -181,5 +182,6 @@ run-script:
     - cwd: /tmp
     - require:
       - cmd: install-script
+      - pkg: base_packages
 
 {% endif %}
