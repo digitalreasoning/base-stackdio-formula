@@ -11,6 +11,9 @@ components:
   - title: AD
     description: Enable Active Directory authentication
     sls_path: dr.ad
+  - title: Native Development
+    description: Install necessary packages to build our native binaries
+    sls_path: dr.native_development
   - title: Yourkit
     description: Install yourkit binaries
     sls_path: dr.yourkit
