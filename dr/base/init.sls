@@ -13,6 +13,14 @@ disable-{{svc}}:
   'RedHat': 'vim-enhanced'
 }) %}
 
+{% set pip_pkg = salt['grains.filter_by']({
+  'Debian': 'python-pip',
+  'RedHat': salt['grains.filter_by']({
+    '6': 'python-pip',
+    '7': 'python2-pip'
+  }, 'osmajorrelease')
+}) %}
+
 #
 # Setup AWS credentials and tools
 #
@@ -73,7 +81,7 @@ base_packages:
     - pkgs:
       - createrepo
       - ntp
-      - python-pip
+      - {{ pip_pkg }}
       - s3cmd
       - screen
       - sysstat
