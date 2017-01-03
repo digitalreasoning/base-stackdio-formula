@@ -10,7 +10,7 @@
   '7': 'nss-pam-ldapd',
 }, grain='osmajorrelease') %}
 
-ad_packages:
+ad-packages:
   pkg:
     - installed
     - pkgs:
@@ -30,7 +30,7 @@ authconfig:
     - name: authconfig --enablesssd --enablesssdauth --enableldap --enableshadow --enablekrb5 --enablekrb5kdcdns --disableldaptls --ldapserver={{ server_fqdn }} --ldapbasedn={{ base_dn }}  --krb5realm={{ krb5_realm }} --krb5adminserver={{ server_fqdn }} --updateall
     - user: root
     - require:
-      - pkg: ad_packages
+      - pkg: ad-packages
 
 /etc/sssd/sssd.conf:
   file:
@@ -41,7 +41,7 @@ authconfig:
     - group: root
     - mode: '0600'
     - require:
-      - pkg: ad_packages
+      - cmd: authconfig
 
 /etc/krb5.conf:
   file:
@@ -52,15 +52,15 @@ authconfig:
     - group: root
     - mode: 644
     - require:
-      - pkg: ad_packages
+      - cmd: authconfig
 
 /etc/nsswitch.conf:
   file:
     - replace
     - pattern: 'automount: .*'
-    - repl: 'automount:  files ldap'
+    - repl: 'automount:  files ldap sss'
     - require:
-      - pkg: ad_packages
+      - cmd: authconfig
     - watch_in:
       - service: rpcbind
       - service: nfs
@@ -76,7 +76,7 @@ authconfig:
     - group: root
     - mode: 644
     - require:
-      - pkg: ad_packages
+      - cmd: authconfig
 
 /etc/sysconfig/autofs:
   file:
@@ -87,7 +87,7 @@ authconfig:
     - group: root
     - mode: 644
     - require:
-      - pkg: ad_packages
+      - cmd: authconfig
 
 /etc/autofs_ldap_auth.conf:
   file:
@@ -98,14 +98,14 @@ authconfig:
     - group: root
     - mode: '0600'
     - require:
-      - pkg: ad_packages
+      - cmd: authconfig
 
 /etc/sudoers:
   file:
     - append
     - text: '%linuxusers    ALL=(ALL)       NOPASSWD: ALL'
     - require:
-      - pkg: ad_packages
+      - cmd: authconfig
 
 /vhome:
   file:
@@ -118,7 +118,7 @@ rpcbind:
   service:
     - running
     - require:
-      - pkg: ad_packages
+      - pkg: ad-packages
       - cmd: authconfig
     - watch:
       - file: /etc/sssd/sssd.conf
@@ -166,15 +166,3 @@ autofs:
       - file: /etc/sysconfig/autofs
       - file: /etc/autofs_ldap_auth.conf
       - file: /etc/sudoers
-
-# Run this again to fix the issue with AD failing to work
-authconfig2:
-  cmd:
-    - run
-    - name: authconfig --enablesssd --enablesssdauth --enableldap --enableshadow --enablekrb5 --enablekrb5kdcdns --disableldaptls --ldapserver={{ server_fqdn }} --ldapbasedn={{ base_dn }}  --krb5realm={{ krb5_realm }} --krb5adminserver={{ server_fqdn }} --updateall
-    - user: root
-    - require:
-      - service: rpcbind
-      - service: nfs
-      - service: sssd
-      - service: autofs
