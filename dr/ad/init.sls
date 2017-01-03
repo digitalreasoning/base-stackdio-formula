@@ -117,6 +117,7 @@ authconfig:
 rpcbind:
   service:
     - running
+    - enable: true
     - require:
       - pkg: ad-packages
       - cmd: authconfig
@@ -131,6 +132,7 @@ rpcbind:
 nfs:
   service:
     - running
+    - enable: true
     - require:
       - service: rpcbind
     - watch:
@@ -144,6 +146,7 @@ nfs:
 sssd:
   service:
     - running
+    - enable: true
     - require:
       - service: nfs
     - watch:
@@ -157,6 +160,7 @@ sssd:
 autofs:
   service:
     - running
+    - enable: true
     - require:
       - service: sssd
     - watch:
