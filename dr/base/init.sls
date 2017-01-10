@@ -17,6 +17,7 @@ disable-{{svc}}:
   'Debian': 'python-pip',
   'RedHat': salt['grains.filter_by']({
     '6': 'python-pip',
+    '2016': 'python-pip',
     '7': 'python2-pip'
   }, 'osmajorrelease')
 }) %}
