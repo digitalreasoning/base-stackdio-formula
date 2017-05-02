@@ -10,3 +10,13 @@ blas:
     - pkgs:
       - blas-devel
       - openblas-devel
+
+ius-release:
+  pkg.installed:
+    - sources:
+      - ius-release: https://{{ grains['os'] }}{{ grains['osmajorrelease'] }}.iuscommunity.org/ius-release.rpm
+
+git2u-all:
+  pkg.installed:
+    - require:
+      - pkg: ius-release
