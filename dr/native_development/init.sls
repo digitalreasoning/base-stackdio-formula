@@ -16,7 +16,11 @@ ius-release:
     - sources:
       - ius-release: https://{{ grains['os'] }}{{ grains['osmajorrelease'] }}.iuscommunity.org/ius-release.rpm
 
+git:
+  pkg.removed: []
+
 git2u-all:
   pkg.installed:
     - require:
       - pkg: ius-release
+      - pkg: git
