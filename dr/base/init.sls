@@ -91,7 +91,7 @@ base_packages:
       - {{ vim_pkg }}
       - zsh
 
-{% for pippkg in ["awscli==1.4.4","pygtail","graphitesend"] %}
+{% for pippkg in ["awscli","pygtail"] %}
 install-{{pippkg}}:
   pip.installed:
     - name: {{pippkg}}
