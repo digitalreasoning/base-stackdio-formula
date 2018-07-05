@@ -1,4 +1,4 @@
-{% if sumologic.install %}
+{% if pillar.sumologic.install %}
 
 # Get roles of this host
 {% set datanode = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh5.hadoop.hdfs.datanode', 'grains.items', 'compound') %}
