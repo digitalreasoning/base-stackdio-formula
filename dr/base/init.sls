@@ -1,4 +1,6 @@
-
+include:
+  - dr.base.sumologic
+  
 # turn off iptables
 {% for svc in [ "iptables", "ip6tables"] %}
 disable-{{svc}}:

@@ -1,0 +1,17 @@
+{
+  "api.version":"v1",
+  "sources":[
+    {
+      "sourceType":"LocalFile",
+      "name":"EdgeNode Log",
+      "pathExpression":"/mnt/grater/*/synthesys/synthesys-qa*/logs/*"
+    },
+    {
+      "sourceType":"SystemStats",
+      "name":"Disk Used",
+      "interval":300000,
+      "hostName": "{{ grains.id }}",
+      "metrics": ["Disk_Used"]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "api.version":"v1",
+  "sources":[
+    {
+      "sourceType":"LocalFile",
+      "name":"HDFS Log",
+      "pathExpression":"/var/log/hadoop-hdfs/hadoop-hdfs-*.log"
+    },
+    {
+      "sourceType":"LocalFile",
+      "name":"HDFS Out",
+      "pathExpression":"/var/log/hadoop-hdfs/hadoop-hdfs-*.out"
+    },
+    {
+      "sourceType":"LocalFile",
+      "name":"YARN Log",
+      "pathExpression":"/var/log/hadoop-yarn/yarn-yarn-nodemanager*.log"
+    },
+    {
+      "sourceType":"LocalFile",
+      "name":"YARN Out",
+      "pathExpression":"/var/log/hadoop-yarn/yarn-yarn-nodemanager*.out"
+    },
+    {
+      "sourceType":"SystemStats",
+      "name":"Disk Used",
+      "interval":300000,
+      "hostName": "{{ grains.id }}",
+      "metrics": ["Disk_Used"]
+    }
+  ]
+}

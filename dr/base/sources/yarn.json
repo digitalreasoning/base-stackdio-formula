@@ -1,0 +1,20 @@
+{
+  "api.version":"v1",
+  "sources":[
+    {
+      "sourceType":"LocalFile",
+      "name":"YARN syslog",
+      "pathExpression":"/mnt/hadoop/yarn/logs/**/syslog"
+    },
+    {
+      "sourceType":"LocalFile",
+      "name":"YARN stderr",
+      "pathExpression":"/mnt/hadoop/yarn/logs/**/stderr"
+    },
+    {
+      "sourceType":"LocalFile",
+      "name":"YARN stdout",
+      "pathExpression":"/mnt/hadoop/yarn/logs/**/stdout"
+    }
+  ]
+}
