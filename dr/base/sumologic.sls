@@ -4,7 +4,7 @@
 {% set datanode = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh5.hadoop.hdfs.datanode', 'grains.items', 'compound') %}
 {% set yarn = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh5.hadoop.yarn.nodemanager', 'grains.items', 'compound') %}
 {% set esdata = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:elasticsearch.data', 'grains.items', 'compound') %}
-{% set edgenode = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:dh5.hadoop.client', 'grains.items', 'compound') %}
+{% set edgenode = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh5.hadoop.client', 'grains.items', 'compound') %}
 {% set oozie = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh5.oozie', 'grains.items', 'compound') %}
 
 {% set anyroles = datanode or yarn or esdata or edgenode or oozie %}
