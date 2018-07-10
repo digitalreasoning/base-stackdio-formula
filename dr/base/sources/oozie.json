@@ -2,7 +2,7 @@
   "api.version":"v1",
   "source":{
      "sourceType":"LocalFile",
-     "name":"Var Log",
+     "name":"Oozie Log",
      "pathExpression":"/var/log/oozie*"
   }
 }
