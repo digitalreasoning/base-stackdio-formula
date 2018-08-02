@@ -8,7 +8,7 @@
 {% set oozie = 'cdh5.oozie' in grains.roles %}
 
 {% set anyroles = datanode or yarn or esdata or edgenode or oozie %}
-{% if anyroles %}
+
 collector_sources:
   file.directory:
     - name: /opt/SumoCollector/sources
@@ -16,7 +16,6 @@ collector_sources:
     - group: root
     - mode: 755
     - makedirs: true
-{% endif %}
 
 # Install log sources for this host
 {% if datanode %}
@@ -76,7 +75,6 @@ collector_sources:
 {% endif %}
 
 
-{% if anyroles %}
 # Install the package
 wget:
   pkg.installed
@@ -104,6 +102,5 @@ collector:
     - enable: True
     - watch:
       - cmd: install
-{% endif %}
 
 {% endif %}
