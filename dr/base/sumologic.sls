@@ -108,7 +108,7 @@ sumo_install:
       - file: sumo_script
 
 # Start the collector
-sumo_collector:
+collector:
   service.running:
     - enable: True
     - watch:
