@@ -103,6 +103,7 @@ sumo_script:
 sumo_install:
   cmd.run:
     - name: /tmp/installsumo.sh
+    - unless: ls /opt/SumoCollector/uninstall
     - requires:
       - file: sumo_script
 
