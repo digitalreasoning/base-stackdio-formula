@@ -79,7 +79,7 @@ collector_sources:
 wget:
   pkg.installed
 
-script:
+sumo_script:
   file.managed:
     - name: /tmp/installsumo.sh
     - source: salt://dr/base/scripts/installsumo.sh
@@ -89,18 +89,19 @@ script:
     - template: jinja
     - requires:
       - pkg: wget
+      - file: collector_sources
 
-install:
+sumo_install:
   cmd.run:
     - name: /tmp/installsumo.sh
     - requires:
-      - file: script
+      - file: sumo_script
 
 # Start the collector
-collector:
+sumo_collector:
   service.running:
     - enable: True
     - watch:
-      - cmd: install
+      - cmd: sumo_install
 
 {% endif %}
