@@ -74,6 +74,14 @@ collector_sources:
       - file: collector_sources
 {% endif %}
 
+/opt/SumoCollector/sources/messages.json:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
+    - source: salt://dr/base/sources/messages.json
+    - requires:
+      - file: collector_sources
 
 # Install the package
 wget:
@@ -90,6 +98,7 @@ sumo_script:
     - requires:
       - pkg: wget
       - file: collector_sources
+      - file: /opt/SumoCollector/sources/messages.json
 
 sumo_install:
   cmd.run:
