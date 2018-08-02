@@ -1,0 +1,8 @@
+{
+  "api.version":"v1",
+  "source":{
+     "sourceType":"LocalFile",
+     "name":"System messages",
+     "pathExpression":"/var/log/messages"
+  }
+}

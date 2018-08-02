@@ -8,7 +8,7 @@
 {% set oozie = 'cdh5.oozie' in grains.roles %}
 
 {% set anyroles = datanode or yarn or esdata or edgenode or oozie %}
-{% if anyroles %}
+
 collector_sources:
   file.directory:
     - name: /opt/SumoCollector/sources
@@ -16,7 +16,6 @@ collector_sources:
     - group: root
     - mode: 755
     - makedirs: true
-{% endif %}
 
 # Install log sources for this host
 {% if datanode %}
@@ -75,13 +74,20 @@ collector_sources:
       - file: collector_sources
 {% endif %}
 
+/opt/SumoCollector/sources/messages.json:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
+    - source: salt://dr/base/sources/messages.json
+    - requires:
+      - file: collector_sources
 
-{% if anyroles %}
 # Install the package
 wget:
   pkg.installed
 
-script:
+sumo_script:
   file.managed:
     - name: /tmp/installsumo.sh
     - source: salt://dr/base/scripts/installsumo.sh
@@ -91,19 +97,21 @@ script:
     - template: jinja
     - requires:
       - pkg: wget
+      - file: collector_sources
+      - file: /opt/SumoCollector/sources/messages.json
 
-install:
+sumo_install:
   cmd.run:
     - name: /tmp/installsumo.sh
+    - unless: ls /opt/SumoCollector/uninstall
     - requires:
-      - file: script
+      - file: sumo_script
 
 # Start the collector
 collector:
   service.running:
     - enable: True
     - watch:
-      - cmd: install
-{% endif %}
+      - cmd: sumo_install
 
 {% endif %}
