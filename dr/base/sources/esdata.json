@@ -16,6 +16,6 @@
       }
     ],
     "pathExpression":"/mnt/elasticsearch/logs/*",
-    "blacklist":["/mnt/elasticsearch/logs/*_access.log"]
+    "blacklist":["/mnt/elasticsearch/logs/*_access*.log"]
   }
 }
