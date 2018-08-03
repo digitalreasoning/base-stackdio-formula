@@ -12,7 +12,7 @@
       {
         "filterType":"Exclude",
         "name":"filter_license",
-        "regexp":".*License [will expire].*"
+        "regexp":"(?s).*If you have a new license, please update it(?s).*"
       }
     ],
     "pathExpression":"/mnt/elasticsearch/logs/*",
