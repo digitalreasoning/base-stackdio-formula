@@ -1,8 +1,21 @@
 {
   "api.version":"v1",
   "source":{
-     "sourceType":"LocalFile",
-     "name":"ES Log",
-     "pathExpression":"/mnt/elasticsearch/logs/*"
+    "sourceType":"LocalFile",
+    "name":"ES Log",
+    "filters":[
+      {
+        "filterType":"Exclude",
+        "name":"filter_log",
+        "regexp":".*The security index is not yet available.*"
+      },
+      {
+        "filterType":"Exclude",
+        "name":"filter_license",
+        "regexp":".*License [will expire].*"
+      }
+    ],
+    "pathExpression":"/mnt/elasticsearch/logs/*",
+    "blacklist":["/mnt/elasticsearch/logs/*_access.log"]
   }
 }
