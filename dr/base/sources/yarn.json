@@ -4,7 +4,14 @@
     {
       "sourceType":"LocalFile",
       "name":"YARN syslog",
-      "pathExpression":"/mnt/hadoop/yarn/logs/**/syslog"
+      "pathExpression":"/mnt/hadoop/yarn/logs/**/syslog",
+      "filters":[
+        {
+          "filterType":"Exclude",
+          "name":"filter_log",
+          "regexp":".*INFO \[.*\] com\.digitalreasoning\.rivulet\.nugget\.analytics.*"
+        }
+      ]
     },
     {
       "sourceType":"LocalFile",
