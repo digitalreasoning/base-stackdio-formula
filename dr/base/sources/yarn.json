@@ -21,7 +21,14 @@
     {
       "sourceType":"LocalFile",
       "name":"YARN stdout",
-      "pathExpression":"/mnt/hadoop/yarn/logs/**/stdout"
+      "pathExpression":"/mnt/hadoop/yarn/logs/**/stdout",
+      "filters":[
+        {
+          "filterType":"Exclude",
+          "name":"filter_log",
+          "regexp":"Processing \/.*\.[a-z][a-z][a-z]"
+        }
+      ]
     }
   ]
 }
