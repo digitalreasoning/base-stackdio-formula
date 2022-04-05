@@ -23,7 +23,7 @@ download-yourkit:
 unpack-yourkit:
   cmd:
     - run
-    - name: bunzip2 {{ pillar.dr.yourkit.version }}-linux.tar.bz2
+    - name: tar -xf {{ pillar.dr.yourkit.version }}-linux.tar.bz2
     - cwd: {{ pillar.dr.yourkit.install_path }}
     - user: root
     - unless: test -d {{ pillar.dr.yourkit.install_path }}/{{ pillar.dr.yourkit.version }}
