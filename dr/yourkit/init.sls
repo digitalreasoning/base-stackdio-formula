@@ -13,7 +13,7 @@ install-dir:
 download-yourkit:
   cmd:
     - run
-    - name: curl -O https://www.yourkit.com/download/{{ pillar.dr.yourkit.version }}-linux.tar.bz2
+    - name: wget https://www.yourkit.com/download/{{ pillar.dr.yourkit.version }}-linux.tar.bz2
     - cwd: {{ pillar.dr.yourkit.install_path }}
     - user: root
     - unless: test -f {{ pillar.dr.yourkit.install_path }}/{{ pillar.dr.yourkit.version }}-linux.tar.bz2
