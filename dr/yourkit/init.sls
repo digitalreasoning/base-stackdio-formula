@@ -13,20 +13,20 @@ install-dir:
 download-yourkit:
   cmd:
     - run
-    - name: curl -O https://www.yourkit.com/download/{{ pillar.dr.yourkit.version }}-linux.tar.bz2
+    - name: curl -O https://download.yourkit.com/yjp/2015/yjp-2015-build-15088-linux.tar.bz2
     - cwd: {{ pillar.dr.yourkit.install_path }}
     - user: root
-    - unless: test -f {{ pillar.dr.yourkit.install_path }}/{{ pillar.dr.yourkit.version }}-linux.tar.bz2
+    - unless: test -f {{ pillar.dr.yourkit.install_path }}/yjp-2015-build-15088-linux.tar.bz2
     - require:
       - file: install-dir
 
 unpack-yourkit:
   cmd:
     - run
-    - name: tar -xf {{ pillar.dr.yourkit.version }}-linux.tar.bz2
+    - name: tar -xf yjp-2015-build-15088-linux.tar.bz2
     - cwd: {{ pillar.dr.yourkit.install_path }}
     - user: root
-    - unless: test -d {{ pillar.dr.yourkit.install_path }}/{{ pillar.dr.yourkit.version }}
+    - unless: test -d {{ pillar.dr.yourkit.install_path }}/yjp-2015-build-15088-linux.tar.bz2
     - require:
       - pkg: bzip2
       - cmd: download-yourkit
